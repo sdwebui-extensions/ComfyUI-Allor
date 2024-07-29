@@ -169,6 +169,7 @@ class Loader:
             self.__create_timestamp()
 
     def check_updates(self):
+        return
         branch_name = self.__config()["updates"]["branch_name"]
         update_frequency = self.__config()["updates"]["update_frequency"].lower()
         valid_frequencies = ["always", "day", "week", "month", "never"]

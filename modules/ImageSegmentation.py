@@ -9,6 +9,9 @@ from ..session.CustomSession import CustomSessionContainer
 from ..session.ModnetPhotographicSession import ModnetPhotographicSession
 from ..session.ModnetWebcamSession import ModnetWebcamSession
 
+remove = None
+new_session = None
+
 
 class ImageSegmentation:
     def __init__(self):
@@ -64,6 +67,9 @@ class ImageSegmentation:
             post_process_mask,
             session=None
     ):
+        global remove, new_session
+        if new_session is None:
+            from rembg import remove, new_session
         if session is None:
             if model == "isnetis":
                 session = new_session("isnet-anime")
@@ -76,6 +82,9 @@ class ImageSegmentation:
 
         def verst(image):
             img: Image = image.tensor_to_image()
+            global remove, new_session
+            if remove is None:
+                from rembg import remove, new_session
 
             return remove(
                 img, alpha_matting == "true",
