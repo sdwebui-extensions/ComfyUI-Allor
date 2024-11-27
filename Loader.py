@@ -257,8 +257,10 @@ class Loader:
     def setup_paths(self):
         fonts_folder_path = self.__get_fonts_folder_path()
 
-        folder_paths.folder_names_and_paths["onnx"] = ([os.path.join(folder_paths.models_dir, "onnx")], {".onnx"})
-        folder_paths.folder_names_and_paths["fonts"] = (fonts_folder_path, {".otf", ".ttf"})
+        if "onnx" not in folder_paths.folder_names_and_paths:
+            folder_paths.folder_names_and_paths["onnx"] = ([os.path.join(folder_paths.models_dir, "onnx")], {".onnx"})
+        if "fonts" not in folder_paths.folder_names_and_paths:
+            folder_paths.folder_names_and_paths["fonts"] = (fonts_folder_path, {".otf", ".ttf"})
 
     def setup_override(self):
         override_nodes_len = 0
