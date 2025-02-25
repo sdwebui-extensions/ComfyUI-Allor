@@ -1,7 +1,5 @@
 from PIL import ImageDraw, Image
 
-from .Utils import get_sampler_by_name
-
 
 class ImageDrawArc:
     def __init__(self):
@@ -92,6 +90,7 @@ class ImageDrawArc:
 
     # noinspection PyPep8Naming, PyUnresolvedReferences
     def node(self, width, height, size, start_x, start_y, end_x, end_y, start, end, red, green, blue, alpha, SSAA, method):
+        from .Utils import get_sampler_by_name
         canvas = Image.new("RGBA", (width * SSAA, height * SSAA), (0, 0, 0, 0))
 
         draw = ImageDraw.Draw(canvas)
@@ -296,6 +295,7 @@ class ImageDrawChord:
 
     # noinspection PyPep8Naming, PyUnresolvedReferences
     def node(self, width, height, size, start_x, start_y, end_x, end_y, start, end, red, green, blue, alpha, SSAA, method):
+        from .Utils import get_sampler_by_name
         canvas = Image.new("RGBA", (width * SSAA, height * SSAA), (0, 0, 0, 0))
 
         draw = ImageDraw.Draw(canvas)
@@ -528,6 +528,7 @@ class ImageDrawEllipse:
             SSAA,
             method
     ):
+        from .Utils import get_sampler_by_name
         canvas = Image.new("RGBA", (width * SSAA, height * SSAA), (0, 0, 0, 0))
 
         draw = ImageDraw.Draw(canvas)
@@ -753,6 +754,7 @@ class ImageDrawLine:
 
     # noinspection PyPep8Naming, PyUnresolvedReferences
     def node(self, width, height, size, start_x, start_y, end_x, end_y, red, green, blue, alpha, SSAA, method):
+        from .Utils import get_sampler_by_name
         canvas = Image.new("RGBA", (width * SSAA, height * SSAA), (0, 0, 0, 0))
 
         draw = ImageDraw.Draw(canvas)
@@ -985,6 +987,7 @@ class ImageDrawPieslice:
             SSAA,
             method
     ):
+        from .Utils import get_sampler_by_name
         canvas = Image.new("RGBA", (width * SSAA, height * SSAA), (0, 0, 0, 0))
 
         draw = ImageDraw.Draw(canvas)
@@ -1263,6 +1266,7 @@ class ImageDrawRectangle:
             SSAA,
             method
     ):
+        from .Utils import get_sampler_by_name
         canvas = Image.new("RGBA", (width * SSAA, height * SSAA), (0, 0, 0, 0))
 
         draw = ImageDraw.Draw(canvas)
@@ -1540,6 +1544,7 @@ class ImageDrawRectangleRounded:
             SSAA,
             method
     ):
+        from .Utils import get_sampler_by_name
         canvas = Image.new("RGBA", (width * SSAA, height * SSAA), (0, 0, 0, 0))
 
         draw = ImageDraw.Draw(canvas)
@@ -1811,6 +1816,7 @@ class ImageDrawPolygon:
             SSAA,
             method
     ):
+        from .Utils import get_sampler_by_name
         canvas = Image.new("RGBA", (size * SSAA, size * SSAA), (0, 0, 0, 0))
 
         draw = ImageDraw.Draw(canvas)

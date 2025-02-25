@@ -3,8 +3,6 @@ import numpy as np
 import torch
 import torchvision.transforms.functional as F
 
-from .Utils import radialspace_1D, radialspace_2D, cv2_layer
-
 
 class ImageEffectsAdjustment:
     def __init__(self):
@@ -321,6 +319,7 @@ class ImageEffectsLensZoomBurst:
         return image
 
     def node(self, images, scale, samples, position_x, position_y, rotation, method, stabilization):
+        from .Utils import cv2_layer
         tensor = images.clone().detach()
 
         return (cv2_layer(tensor, lambda x: self.zoom_burst(
@@ -369,6 +368,7 @@ class ImageEffectsLensChromaticAberration:
     CATEGORY = "image/effects/lens"
 
     def node(self, images, shift, method, shift_type, mixing_type, transpose, colors, lens_curvy):
+        from .Utils import radialspace_1D
         # noinspection PyUnboundLocalVariable
         def apply(image):
             img = image.clone().detach()
@@ -569,6 +569,7 @@ class ImageEffectsLensBokeh:
         return result
 
     def node(self, images, blades_shape, blades_radius, blades_rotation, blur_size, blur_type, method):
+        from .Utils import cv2_layer
         tensor = images.clone().detach()
         blur_size -= 1
 
@@ -624,6 +625,7 @@ class ImageEffectsLensOpticAxis:
     CATEGORY = "image/effects/lens"
 
     def node(self, images, lens_shape, lens_edge, lens_curvy, lens_zoom, lens_aperture, blur_intensity):
+        from .Utils import radialspace_2D, cv2_layer
         blur_intensity -= 1
         lens_zoom += 1
 
@@ -712,6 +714,7 @@ class ImageEffectsLensVignette:
     CATEGORY = "image/effects/lens"
 
     def node(self, images, lens_shape, lens_edge, lens_curvy, lens_zoom, brightness, saturation):
+        from .Utils import radialspace_2D
         tensor = images.clone().detach()
 
         lens_zoom += 1

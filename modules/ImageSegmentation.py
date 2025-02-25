@@ -3,11 +3,6 @@ from PIL import Image
 
 import folder_paths
 
-from ..session.CustomSession import CustomAbstractSession
-from ..session.CustomSession import CustomSessionContainer
-from ..session.ModnetPhotographicSession import ModnetPhotographicSession
-from ..session.ModnetWebcamSession import ModnetWebcamSession
-
 remove = None
 new_session = None
 
@@ -66,6 +61,8 @@ class ImageSegmentation:
             post_process_mask,
             session=None
     ):
+        from ..session.ModnetPhotographicSession import ModnetPhotographicSession
+        from ..session.ModnetWebcamSession import ModnetWebcamSession
         global remove, new_session
         if new_session is None:
             from rembg import remove, new_session
@@ -158,6 +155,8 @@ class ImageSegmentationCustom:
             std,
             size
     ):
+        from ..session.CustomSession import CustomAbstractSession
+        from ..session.CustomSession import CustomSessionContainer
         container = CustomSessionContainer(mean, mean, mean, std, std, std, size, size)
 
         class CustomSession(CustomAbstractSession):
@@ -271,6 +270,8 @@ class ImageSegmentationCustomAdvanced:
             width,
             height
     ):
+        from ..session.CustomSession import CustomAbstractSession
+        from ..session.CustomSession import CustomSessionContainer
         container = CustomSessionContainer(mean_x, mean_y, mean_z, std_x, std_y, std_z, width, height)
 
         class CustomSession(CustomAbstractSession):

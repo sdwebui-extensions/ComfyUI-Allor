@@ -2,8 +2,6 @@ import torch
 import torchvision.transforms.functional as TF
 from PIL import Image, ImageDraw
 
-from .Utils import get_sampler_by_name
-
 
 class ImageTransformResizeAbsolute:
     def __init__(self):
@@ -33,6 +31,7 @@ class ImageTransformResizeAbsolute:
     CATEGORY = "image/transform"
 
     def node(self, images, width, height, method):
+        from .Utils import get_sampler_by_name
         def resize_tensor(tensor):
             return tensor.tensor_to_image().resize((width, height), get_sampler_by_name(method)).image_to_tensor()
 
@@ -251,6 +250,7 @@ class ImageTransformCropCorners:
             SSAA,
             method
     ):
+        from .Utils import get_sampler_by_name
         sampler = get_sampler_by_name(method)
 
         height, width = images[0, :, :, 0].shape

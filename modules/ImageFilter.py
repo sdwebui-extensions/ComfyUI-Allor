@@ -2,8 +2,6 @@ import cv2
 import torch
 from PIL import ImageFilter
 
-from .Utils import cv2_layer
-
 
 def applyImageFilter(images, image_filter):
     return (torch.stack([
@@ -76,6 +74,7 @@ class ImageFilterBlur:
     CATEGORY = "image/filter"
 
     def node(self, images, size_x, size_y):
+        from .Utils import cv2_layer
         return (cv2_layer(images, lambda x: cv2.blur(x, (size_x, size_y))),)
 
 
@@ -104,6 +103,7 @@ class ImageFilterBoxBlur:
     CATEGORY = "image/filter"
 
     def node(self, images, size_x, size_y):
+        from .Utils import cv2_layer
         return (cv2_layer(images, lambda x: cv2.boxFilter(x, -1, (size_x, size_y))),)
 
 
@@ -134,6 +134,7 @@ class ImageFilterGaussianBlur:
     CATEGORY = "image/filter"
 
     def node(self, images, size_x, size_y):
+        from .Utils import cv2_layer
         size_x -= 1
         size_y -= 1
 
@@ -173,6 +174,7 @@ class ImageFilterGaussianBlurAdvanced:
     CATEGORY = "image/filter"
 
     def node(self, images, size_x, size_y, sigma_x, sigma_y):
+        from .Utils import cv2_layer
         size_x -= 1
         size_y -= 1
 
@@ -206,6 +208,7 @@ class ImageFilterStackBlur:
     CATEGORY = "image/filter"
 
     def node(self, images, size_x, size_y):
+        from .Utils import cv2_layer
         size_x -= 1
         size_y -= 1
 
@@ -234,6 +237,7 @@ class ImageFilterMedianBlur:
     CATEGORY = "image/filter"
 
     def node(self, images, size):
+        from .Utils import cv2_layer
         size -= 1
 
         img = images.clone().detach()
@@ -274,6 +278,7 @@ class ImageFilterBilateralBlur:
     CATEGORY = "image/filter"
 
     def node(self, images, size, sigma_color, sigma_intensity):
+        from .Utils import cv2_layer
         size -= 1
 
         return (cv2_layer(images, lambda x: cv2.bilateralFilter(x, size, 100 - sigma_color * 100, sigma_intensity * 100)),)

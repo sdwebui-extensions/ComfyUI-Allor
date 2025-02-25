@@ -1,7 +1,5 @@
 import torch
 
-from .Utils import create_rgba_image
-
 
 class ImageContainer:
     def __init__(self):
@@ -49,6 +47,7 @@ class ImageContainer:
     CATEGORY = "image/container"
 
     def node(self, width, height, red, green, blue, alpha):
+        from .Utils import create_rgba_image
         return (create_rgba_image(width, height, (red, green, blue, int(alpha * 255))).image_to_tensor().unsqueeze(0),)
 
 
@@ -98,6 +97,7 @@ class ImageContainerInheritanceAdd:
     CATEGORY = "image/container"
 
     def node(self, images, add_width, add_height, red, green, blue, alpha, method):
+        from .Utils import create_rgba_image
         width, height = images[0, :, :, 0].shape
 
         width = width + add_width
@@ -209,6 +209,7 @@ class ImageContainerInheritanceMax:
     CATEGORY = "image/container"
 
     def node(self, images_a, images_b, red, green, blue, alpha, method):
+        from .Utils import create_rgba_image
         img_a_height, img_a_width = images_a[0, :, :, 0].shape
         img_b_height, img_b_width = images_b[0, :, :, 0].shape
 
@@ -270,6 +271,7 @@ class ImageContainerInheritanceSum:
     CATEGORY = "image/container"
 
     def node(self, images_a, images_b, red, green, blue, alpha, container_size_type, method):
+        from .Utils import create_rgba_image
         img_a_height, img_a_width = images_a[0, :, :, 0].shape
         img_b_height, img_b_width = images_b[0, :, :, 0].shape
 
